@@ -1,0 +1,107 @@
+<div class= "text" <> drag red box from left to right to change volume </div>
+<div class="empty">
+    <div class="fill" draggable="true"> 1 </div>
+  </div>
+
+  <div class="empty">
+  </div>
+
+  <div class="empty">
+  </div>
+
+  <div class="empty">
+  </div>
+
+  <div class="empty">
+  </div>
+
+  <style>
+    
+    body {
+  background: white;
+}
+
+.text {
+  font-size: 20px;
+}
+
+.fill {
+  background: red;
+  position: relative;
+  height: 150px;
+  width: 150px;
+  top: 5px;
+  left: 5px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  text-size: 
+}
+
+.hold {
+  border: solid 5px #ccc;
+}
+
+.empty {
+  display: inline-block;
+  height: 160px;
+  width: 160px;
+  margin: 10px;
+  border: black;
+  background: pink;
+}
+
+.hovered {
+  background: #f4f4f4;
+  border-style: dashed;
+}
+
+  </style>
+
+  <script>
+    
+    const fill = document.querySelector('.fill');
+const empties = document.querySelectorAll('.empty');
+
+
+fill.addEventListener('dragstart', dragStart);
+fill.addEventListener('dragend', dragEnd);
+
+
+for (const empty of empties) {
+  empty.addEventListener('dragover', dragOver);
+  empty.addEventListener('dragenter', dragEnter);
+  empty.addEventListener('dragleave', dragLeave);
+  empty.addEventListener('drop', dragDrop);
+}
+
+
+
+function dragStart() {
+  this.className += ' hold';
+  setTimeout(() => (this.className = 'invisible'), 0);
+}
+
+function dragEnd() {
+  this.className = 'fill';
+}
+
+function dragOver(e) {
+  e.preventDefault();
+}
+
+function dragEnter(e) {
+  e.preventDefault();
+  this.className += ' hovered';
+}
+
+function dragLeave() {
+  this.className = 'empty';
+}
+
+function dragDrop() {
+  this.className = 'empty';
+  this.append(fill);
+}
+
+  </script>
